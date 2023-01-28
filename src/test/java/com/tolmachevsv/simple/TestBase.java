@@ -13,11 +13,11 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import static java.lang.String.format;
 
 public class TestBase {
-    public static CredentialsConfig credentials =
-            ConfigFactory.create(CredentialsConfig.class);
 
     @BeforeAll
     static void beforeAll() {
+        CredentialsConfig credentials =
+                ConfigFactory.create(CredentialsConfig.class);
 
         String login = credentials.login();
         String password = credentials.password();
@@ -28,9 +28,11 @@ public class TestBase {
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
 
-        String remoteURL = System.getProperty("remoteUrl");
-        System.out.println(remoteURL);
-        Configuration.remote = format("https://%s:%s@%s", login, password, remoteURL);
+        String url = System.getProperty("url");
+        System.out.println(url);
+        String browserSize = System.getProperty("browserSize");
+        System.out.println(browserSize);
+        Configuration.remote = format("https://%s:%s@%s", login, password, url);
     }
 
     @AfterEach
