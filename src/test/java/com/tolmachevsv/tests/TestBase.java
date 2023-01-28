@@ -18,8 +18,10 @@ public class TestBase {
         capabilities.setCapability("enableVideo", true);
 
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-
+//        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        System.setProperty("URL", "https://%s:%s@selenoid.autotests.cloud/wd/hub");
+        String url = System.getProperty("URL");
+        System.out.println(url);
     }
 
     @AfterEach
