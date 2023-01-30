@@ -8,10 +8,12 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static java.lang.String.format;
 
+@Tag("properties")
 public class TestBase {
 
     @BeforeAll
@@ -26,12 +28,17 @@ public class TestBase {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
-        Configuration.browserCapabilities = capabilities;
 
         String url = System.getProperty("url");
-        System.out.println(url);
+        String browser = System.getProperty("browser");
         String browserSize = System.getProperty("browserSize");
+        System.out.println(url);
         System.out.println(browserSize);
+        System.out.println(browser);
+
+        Configuration.browserCapabilities = capabilities;
+        Configuration.browserSize = browserSize;
+        Configuration.browser = browser;
         Configuration.remote = format("https://%s:%s@%s", login, password, url);
     }
 

@@ -12,7 +12,7 @@ public class YandexTest extends TestBase {
     @Test
     @Tag("properties")
     public void SimpleTest() {
-        open("https://ya.ru");
+        open("https://github.com");
         $("#text").sendKeys("Steam");
         $("#text").submit();
     }
